@@ -1,0 +1,9 @@
+# Ignora todo
+*
+
+# Pero conserva estas excepciones
+!.gitignore
+!README.md
+!src/
+!src/frontend/
+!src/frontend/**
