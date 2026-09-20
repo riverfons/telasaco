@@ -42,6 +42,20 @@ function connectVotes(userId) {
   voteButtons.forEach((button) => {
     const design = button.dataset.design;
     const voteRef = ref(db, `votos/${design}/${userId}`);
+    const designVotesRef = ref(db, `votos/${design}`);
+    const countElement = document.querySelector(`.vote-count[data-design="${design}"]`);
+
+    onValue(
+      designVotesRef,
+      (snapshot) => {
+        const total = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+        countElement.textContent = `${total} ${total === 1 ? 'voto' : 'votos'}`;
+      },
+      (error) => {
+        console.error(`No se han podido leer los votos de ${design}:`, error);
+        countElement.textContent = 'Votos no disponibles';
+      }
+    );
 
     onValue(voteRef, (snapshot) => {
       if (snapshot.val() === true) {
