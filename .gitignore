@@ -7,3 +7,5 @@
 !src/
 !src/frontend/
 !src/frontend/**
+!src/frontend/fonts/
+!src/frontend/fonts/**
